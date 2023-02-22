@@ -1,7 +1,12 @@
 from github import Github
 
+from service import get_all_pull_requests
+
 
 git = Github()
 
-repo = git.get_repo("Maki-Python-Project/url-shortner-api")
-print(repo.subscribers_count)
+repo = git.get_repo("mahmoud/awesome-python-applications")
+
+
+if __name__ == "__main__":
+    print(get_all_pull_requests(repo))
