@@ -51,6 +51,14 @@ def get_all_pull_requests(repo: Repository) -> List[tuple]:
     all_pull_requests = []
 
     for pull in repo.get_pulls():
+        requested_reviewers = [
+            (
+                reviewer.login,
+                reviewer.type,
+            )
+            for reviewer in pull.requested_reviewers
+        ]
+
         all_pull_requests.append(
             (
                 pull.number,
@@ -60,6 +68,7 @@ def get_all_pull_requests(repo: Repository) -> List[tuple]:
                 pull.user.login,
                 get_commits(pull.commits_url),
                 get_comments(pull.comments_url),
+                requested_reviewers,
             )
         )
 
