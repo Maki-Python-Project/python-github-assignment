@@ -29,10 +29,28 @@ def get_commits(commits_url: str) -> List[tuple]:
     return commits
 
 
+def get_comments(comments_url: str) -> List[tuple]:
+    comments = []
+    response = requests.get(comments_url)
+
+    for comment in response.json():
+        comments.append(
+            (
+                comment["user"]["login"],
+                comment["created_at"],
+                comment["updated_at"],
+                comment["updated_at"],
+                comment["body"],
+            )
+        )
+
+    return comments
+
+
 def get_all_pull_requests(repo: Repository) -> List[tuple]:
     all_pull_requests = []
 
-    for pull in repo.get_pulls()[:1]:
+    for pull in repo.get_pulls():
         all_pull_requests.append(
             (
                 pull.number,
@@ -41,6 +59,7 @@ def get_all_pull_requests(repo: Repository) -> List[tuple]:
                 get_open_time(pull.created_at),
                 pull.user.login,
                 get_commits(pull.commits_url),
+                get_comments(pull.comments_url),
             )
         )
 

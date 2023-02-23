@@ -5,7 +5,7 @@ from service import get_all_pull_requests
 
 git = Github()
 
-repo = git.get_repo("mahmoud/awesome-python-applications")
+repo = git.get_repo("opencv/opencv")
 
 
 if __name__ == "__main__":
