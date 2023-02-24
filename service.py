@@ -39,7 +39,6 @@ def get_comments(comments_url: str) -> List[tuple]:
                 comment["user"]["login"],
                 comment["created_at"],
                 comment["updated_at"],
-                comment["updated_at"],
                 comment["body"],
             )
         )
@@ -73,3 +72,41 @@ def get_all_pull_requests(repo: Repository) -> List[tuple]:
         )
 
     return all_pull_requests
+
+
+def print_info_about_pull_requests(all_pull_requests: List[tuple]) -> None:
+    for pull in all_pull_requests:
+        (
+            number,
+            title,
+            created_at,
+            open_time,
+            user_login,
+            commits,
+            comments,
+            requested_reviewers,
+        ) = pull
+        print("Number: ", number)
+        print("Title: ", title)
+        print("Created at: ", created_at)
+        print("Open time: ", open_time)
+        print("User login: ", user_login)
+
+        for commit in commits:
+            sha, commiter, author, msg = commit
+            print("SHA: ", sha)
+            print("Сommiter: ", commiter)
+            print("Author: ", author)
+            print("Message: ", msg)
+
+        for comment in comments:
+            user_login, created_at, updated_at, body = comment
+            print("User login: ", user_login)
+            print("Created at: ", created_at)
+            print("Updated at: ", updated_at)
+            print("Body: ", body)
+
+        for requested_reviewer in requested_reviewers:
+            user_login, type_ = requested_reviewer
+            print("User login", user_login)
+            print("Type: ", type_)
