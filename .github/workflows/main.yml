@@ -1,8 +1,8 @@
 name: run script.py
 
-on:
-  schedule:
-    - cron: '* */1 * * *'
+# on:
+#   schedule:
+#     - cron: '* */1 * * *'
 
 jobs:
   build:
