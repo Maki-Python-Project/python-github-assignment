@@ -5,7 +5,7 @@ from service import get_all_pull_requests, print_info_about_pull_requests
 
 git = Github()
 
-repo = git.get_repo("opencv/opencv")
+repo = git.get_repo("vovalaz/python-github-assignment")
 
 
 if __name__ == "__main__":
